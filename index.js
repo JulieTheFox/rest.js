@@ -16,6 +16,12 @@ const PLUGINS = [
 function GitHubApi (options) {
   const defaults = defaultsDeep(parseClientOptions(options), ENDPOINT_DEFAULTS)
 
+  if (options.customHttpClient) {
+    request.init(options.customHttpClient);
+  } else {
+    request.init();
+  }
+
   const hook = new Hook()
   const api = {
     // NOTE: github.hook, github.plugin and github.request are experimental APIs
